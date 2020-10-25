@@ -1,22 +1,11 @@
-module.exports = function check(str = [], bracketsConfig) {
-  const stack = [];
-  const open = ['(', '[', '{'];
-  const close = [')', ']', '}'];
-console.log(str);
-console.log(bracketsConfig);
-  for (let i = 0 ; i < str.length; i++){
-    if (open.includes(str[i])){
-      stack.push(str[i]);
+module.exports = function check(str, bracketsConfig) {
+    const stack = [];
+    bracketsConfig = [].concat(...bracketsConfig)
+    for (let i = 0; i < str.length; i++) {
+      str[i] === stack[stack.length - 1] ? stack.pop() : stack.push(bracketsConfig[bracketsConfig.indexOf(str[i])+1])
     }
-    else{
-      if (close.indexOf(str[i]) === open.indexOf(stack[stack.length - 1])){
-        stack.pop();
-      }
-     
-    }
-  }
-  console.log(stack.length === 0);
-  return stack.length === 0;
+    console.log(stack.length === 0);
+    return stack.length === 0;
 
-  // your solution
-}
+    // your solution
+};
